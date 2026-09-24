@@ -1,0 +1,20 @@
+web_scraping_data_analysis/
+│
+├── main.py
+├── scraper.py
+├── data_analysis.py
+├── visualizations.py
+├── requirements.txt
+├── README.md
+│
+├── data/
+│   └── products.csv
+│
+├── output/
+│   ├── price_distribution.png
+│   ├── rating_distribution.png
+│   ├── category_analysis.png
+│   └── analysis_report.csv
+│
+└── report/
+    └── Project_Report.md
