@@ -1,0 +1,31 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+
+def scrape_products(url):
+    headers = {
+        "User-Agent": "Mozilla/5.0"
+    }
+
+    response = requests.get(url, headers=headers, timeout=10)
+    response.raise_for_status()
+
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    products = []
+
+    for item in soup.select(".product"):
+        name = item.select_one(".product-name")
+        price = item.select_one(".price")
+        rating = item.select_one(".rating")
+        category = item.select_one(".category")
+
+        products.append({
+            "Product": name.get_text(strip=True) if name else "N/A",
+            "Price": price.get_text(strip=True) if price else "N/A",
+            "Rating": rating.get_text(strip=True) if rating else "N/A",
+            "Category": category.get_text(strip=True) if category else "N/A"
+        })
+
+    return pd.DataFrame(products)
